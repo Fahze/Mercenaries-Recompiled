@@ -11,11 +11,20 @@
 > [KraftMacAndChee/Mercenaries-Recompiled#22](https://github.com/KraftMacAndChee/Mercenaries-Recompiled/pull/22).
 > Build exactly as described below, passing the French ISO.
 >
+> **RecompLauncher:** the
+> [`v1.1.1-eu-fr.1` release](https://github.com/Fahze/Mercenaries-Recompiled/releases/tag/v1.1.1-eu-fr.1)
+> is a RecompLauncher package (`recomplauncher.json` + setup step, no game code
+> or data) that builds the game from your own USA or EU-FR disc. Its sources
+> are in [`ports/mercenaries/recomplauncher`](ports/mercenaries/recomplauncher).
+>
 > **Fork : prise en charge du disque EU-FR.** Ce fork accepte aussi le disque
 > Xbox PAL français. Le jeu se compile avec la même commande que ci-dessous en
 > indiquant l'ISO française, et s'affiche en français. Testé : première mission
 > terminée et sauvegarde fonctionnelle. Proposé au projet d'origine dans la
 > [pull request #22](https://github.com/KraftMacAndChee/Mercenaries-Recompiled/pull/22).
+> Pour RecompLauncher, utilise la
+> [release `v1.1.1-eu-fr.1`](https://github.com/Fahze/Mercenaries-Recompiled/releases/tag/v1.1.1-eu-fr.1) :
+> elle compile le jeu depuis ton propre ISO.
 
 DISCLAIMER: This project utilized a hybrid-workflow and iterative development.
 	    It was built with the assistance of Codex 5.6 Sol and Astra!
