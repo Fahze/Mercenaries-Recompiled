@@ -189,7 +189,8 @@ $milestones = @(
     @{ Pattern = "^Parsing XBE metadata"; Fraction = 0.25; Text = "Analysing the game code" },
     @{ Pattern = "^Lifting functions"; Fraction = 0.40; Text = "Translating the game code to C" },
     @{ Pattern = "^Applied generated patch"; Fraction = 0.50; Text = "Applying the port's fixes" },
-    @{ Pattern = "recomp_0000\.c$"; Fraction = 0.60; Text = "Compiling (the longest step)" },
+    # MSBuild prints the bare file name; the lifter prints full paths.
+    @{ Pattern = "^recomp_0000\.c$"; Fraction = 0.60; Text = "Compiling (the longest step)" },
     @{ Pattern = "mercenaries_recomp\.vcxproj ->"; Fraction = 0.88; Text = "Finishing the build" }
 )
 $reached = 0.15
