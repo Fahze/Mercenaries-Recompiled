@@ -14,6 +14,7 @@ The root MIT license does not replace licenses on imported components.
 | Windows SDK shader compiler | `ports/mercenaries/third_party/d3dcompiler` | `README.txt`, SDK license and third-party notices |
 | Hack Regular | `ports/mercenaries/resources/launcher` | `Hack-LICENSE.txt`, including underlying font notices |
 | Earlier Anton font | Same launcher resource directory | `OFL.txt`; retained reference, not currently embedded |
+| Recomp Achievements SDK (`faf094a`), with cJSON and rcheevos | `third_party/rl-achievements` | `LICENSE` (Recomp Achievements License 1.0, free for games), cJSON and rcheevos MIT `LICENSE` files, `PROVENANCE.md` with file hashes; licenses copied into `licenses` by the build |
 | Lua 5.0.3 (host tests only) | `third_party/lua-5.0.3` | Unmodified public sources; `COPYRIGHT` (MIT), `UPSTREAM.json` with source hashes |
 | Python build dependencies | `ports/mercenaries/requirements.txt` | Pinned Capstone, CMake and Ninja versions |
 

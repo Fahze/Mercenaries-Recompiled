@@ -36,7 +36,7 @@
       "-IsoPath",
       "{input:game}",
       "-SourceRef",
-      "v1.1.1-eu-fr.2"
+      "v1.1.1-eu-fr.3"
     ],
     "label": "Building the game from your disc (20-40 minutes)",
     "done": [

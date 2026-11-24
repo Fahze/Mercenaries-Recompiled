@@ -92,6 +92,21 @@ The game's page in RecompLauncher shows the port's options. They are written to
   ones).
 - **Gameplay** (advanced): NPC wake distance, original bugs.
 
+The runtime also speaks RecompLauncher's channel (`RL_SESSION`), through the
+vendored [Recomp Achievements](https://github.com/elripalda/RecompAchievements)
+SDK in [`third_party/rl-achievements`](third_party/rl-achievements). With it:
+- RecompLauncher can load a list for this game, with a rich presence line and
+  achievements written against Xbox guest memory;
+- the presence line replaces "via RecompLauncher" on Discord and on the
+  player's profile;
+- opening the developer tools (F9 menu, free camera) marks the session as
+  Casual.
+
+RecompLauncher only opens that channel for its achievement testers for now.
+Outside RecompLauncher every call is a no-op.
+`tools/recomp/test_recomplauncher_channel_native.py` checks the channel end to
+end against a built runtime.
+
 The package sources are in
 [`ports/mercenaries/recomplauncher`](ports/mercenaries/recomplauncher).
 

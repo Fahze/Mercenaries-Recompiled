@@ -1,5 +1,6 @@
 #include "recomp_controls.h"
 #include "plugin_host.h"
+#include "recomp_launcher_channel.h"
 #include "slope_slide.h"
 #include "preview_log.h"
 #include "dev_menu.h"
@@ -7845,6 +7846,7 @@ void recomp_input_logical_checkpoint(uint32_t joystick_address)
      * input-update callback, not a render/vblank or simulation tick. */
     if (!merc_plugins_update())
         merc_plugins_show_error();
+    recomp_launcher_channel_frame();
     recomp_mod_gameplay_tick();
     recomp_dev_missions_tick();
     static uint32_t samples;

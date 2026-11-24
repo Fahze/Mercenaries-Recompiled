@@ -76,6 +76,7 @@ set(GAME_SOURCES
     src/dev_overlay.c
     src/free_cam.c
     src/shader_warmup.c
+    src/recomp_launcher_channel.c
     ${SHADER_WARMUP_HEADER}
 )
 
@@ -97,6 +98,28 @@ endif()
 
 # Link against the xboxrecomp umbrella target (all 6 runtime libraries)
 target_link_libraries(${PROJECT_NAME} PRIVATE xboxrecomp)
+
+# Recomp Achievements SDK: the RecompLauncher channel (RL_SESSION). Vendored
+# unmodified; built the way its own sdk/CMakeLists.txt builds it.
+set(RL_ACH_DIR "${XBOXRECOMP_DIR}/third_party/rl-achievements/sdk")
+file(GLOB RL_ACH_RC_SOURCES
+    "${RL_ACH_DIR}/third_party/rcheevos/src/runtime/*.c"
+    "${RL_ACH_DIR}/third_party/rcheevos/src/util/*.c")
+add_library(rl_achievements STATIC
+    "${RL_ACH_DIR}/src/rl_achievements.c"
+    "${RL_ACH_DIR}/third_party/cjson/cJSON.c"
+    ${RL_ACH_RC_SOURCES})
+target_include_directories(rl_achievements
+    PUBLIC "${RL_ACH_DIR}/include"
+    PRIVATE "${RL_ACH_DIR}/third_party/rcheevos/include"
+            "${RL_ACH_DIR}/third_party/rcheevos/src"
+            "${RL_ACH_DIR}/third_party/cjson")
+target_compile_definitions(rl_achievements PRIVATE RC_DISABLE_LUA _CRT_SECURE_NO_WARNINGS)
+if(MSVC)
+    # Third-party C: keep its warnings out of the port's build output.
+    target_compile_options(rl_achievements PRIVATE /W0)
+endif()
+target_link_libraries(${PROJECT_NAME} PRIVATE rl_achievements)
 
 # Plugin host uses the versioned C ABI and C++17 filesystem internally.
 set_target_properties(mercenaries_recomp PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
@@ -243,5 +266,14 @@ add_custom_command(TARGET mercenaries_recomp POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${XBOXRECOMP_DIR}/src/licenses/xemu-GPL-2.0.txt"
         "$<TARGET_FILE_DIR:mercenaries_recomp>/licenses/xemu-GPL-2.0.txt"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${XBOXRECOMP_DIR}/third_party/rl-achievements/LICENSE"
+        "$<TARGET_FILE_DIR:mercenaries_recomp>/licenses/RecompAchievements-LICENSE.txt"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${XBOXRECOMP_DIR}/third_party/rl-achievements/sdk/third_party/rcheevos/LICENSE"
+        "$<TARGET_FILE_DIR:mercenaries_recomp>/licenses/rcheevos-LICENSE.txt"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${XBOXRECOMP_DIR}/third_party/rl-achievements/sdk/third_party/cjson/LICENSE"
+        "$<TARGET_FILE_DIR:mercenaries_recomp>/licenses/cJSON-LICENSE.txt"
     VERBATIM
 )

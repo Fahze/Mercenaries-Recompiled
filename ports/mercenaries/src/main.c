@@ -8,6 +8,7 @@
 #include "dev_overlay.h"
 #include "free_cam.h"
 #include "shader_warmup.h"
+#include "recomp_launcher_channel.h"
 /**
  * Mercenaries - recompiled game entry point.
  *
@@ -2221,9 +2222,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         return 1;
     }
     atexit(merc_plugins_shutdown);
+    /* RecompLauncher channel: a no-op unless RecompLauncher set RL_SESSION. */
+    recomp_launcher_channel_init(xbox_GetMemoryBase(), 0x04000000u);
+    atexit(recomp_launcher_channel_shutdown);
     start_trace_watchdog();
     xbe_entry_point();
     merc_plugins_shutdown();
+    recomp_launcher_channel_shutdown();
 
     printf("\nGame returned. Cleaning up...\n");
 

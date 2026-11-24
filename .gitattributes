@@ -1,3 +1,6 @@
 # Shell scripts must stay LF: a CRLF checkout breaks the shebang on Linux
 # ("bad interpreter: /usr/bin/env bash^M").
 *.sh text eol=lf
+
+# Vendored SDK: keep upstream bytes so PROVENANCE.md hashes match on every checkout.
+third_party/rl-achievements/** -text
