@@ -1,65 +1,90 @@
-# Mercenaries Recompiled
+# Mercenaries Recompiled: USA + EU-FR
 
-> **Fork: EU-FR (France) disc support.** This fork of
-> [KraftMacAndChee/Mercenaries-Recompiled](https://github.com/KraftMacAndChee/Mercenaries-Recompiled)
-> also accepts the French PAL retail Xbox disc (Redump "Mercenaries (France)",
-> `default.xbe` SHA-256 `9DD26D6C…FDC356`). Its code is identical to the USA
-> release, so all generated patches apply unchanged; the runtime reports the
-> console language matching the disc's `DATAxbox/french.dsk`. The changes live
-> on the [`eu-fr-support`](https://github.com/Fahze/Mercenaries-Recompiled/tree/eu-fr-support)
-> branch, proposed upstream in
+A native Windows port of **Mercenaries: Playground of Destruction** that works
+with the **USA** and the **French (EU-FR)** retail Xbox discs.
+
+> This is a fork of
+> [KraftMacAndChee/Mercenaries-Recompiled](https://github.com/KraftMacAndChee/Mercenaries-Recompiled).
+> The upstream project only accepts the USA disc. This fork adds the French
+> PAL disc and a RecompLauncher package. It otherwise follows upstream, and its
+> changes are proposed back in
 > [KraftMacAndChee/Mercenaries-Recompiled#22](https://github.com/KraftMacAndChee/Mercenaries-Recompiled/pull/22).
-> Build exactly as described below, passing the French ISO.
->
-> **RecompLauncher:** the
-> [`v1.1.1-eu-fr.1` release](https://github.com/Fahze/Mercenaries-Recompiled/releases/tag/v1.1.1-eu-fr.1)
-> is a RecompLauncher package (`recomplauncher.json` + setup step, no game code
-> or data) that builds the game from your own USA or EU-FR disc. Its sources
-> are in [`ports/mercenaries/recomplauncher`](ports/mercenaries/recomplauncher).
->
-> **Fork : prise en charge du disque EU-FR.** Ce fork accepte aussi le disque
-> Xbox PAL français. Le jeu se compile avec la même commande que ci-dessous en
-> indiquant l'ISO française, et s'affiche en français. Testé : première mission
-> terminée et sauvegarde fonctionnelle. Proposé au projet d'origine dans la
-> [pull request #22](https://github.com/KraftMacAndChee/Mercenaries-Recompiled/pull/22).
-> Pour RecompLauncher, utilise la
-> [release `v1.1.1-eu-fr.1`](https://github.com/Fahze/Mercenaries-Recompiled/releases/tag/v1.1.1-eu-fr.1) :
-> elle compile le jeu depuis ton propre ISO.
 
-DISCLAIMER: This project utilized a hybrid-workflow and iterative development.
-	    It was built with the assistance of Codex 5.6 Sol and Astra!
-
-A native Windows port of **Mercenaries: Playground of Destruction**, built with
-[xboxrecomp](https://github.com/sp00nznet/xboxrecomp). The project translates the
-original Xbox executable into C and supplies compatibility layers for graphics,
-audio, input, memory, and kernel services.
-
-**You must supply your own supported retail Xbox copy of the game.** This source
-repository does not include a disc image, extracted game-data tree, or generated
-game executable. A PS2 disc is not a substitute for the Xbox build input.
-
+[Play with RecompLauncher](#play-with-recomplauncher) ·
+[Build from source](#build-from-source) ·
+[Report a problem](#reporting-a-problem) ·
 [Build guide](ports/mercenaries/README.md) ·
 [Documentation](docs/README.md) ·
 [Architecture](ARCHITECTURE.md) ·
-[Contributing](CONTRIBUTING.md) ·
-[Dependencies and licenses](docs/dependencies.md)
+[Contributing](CONTRIBUTING.md)
 
-## What is in this repository?
+## En français
 
-This is the maintained source, translation tooling, tests, documentation, and
-pinned dependencies for the Windows x64 port. Features include keyboard/mouse
-and controller support, configurable controls, resolution and aspect-ratio
-options, an FPS cap, and selectable original-game bug compatibility. See the
-[default controls](docs/DEFAULT_CONTROLS.md) and
-[OG Bugs behavior](docs/original-game-bugs.md) for details.
+Ce dépôt permet de jouer à Mercenaries Recompiled avec le **disque Xbox PAL
+français** (Redump « Mercenaries (France) »), en plus du disque USA. Le jeu
+s'affiche en français. Tu as besoin de ta propre image du disque (.iso) : ce
+dépôt ne contient aucun fichier du jeu.
 
-The source archive is a developer package. It must be built before it can be
-played. A player release is a separate package containing the launcher, native
-runtime, dependencies, and first-launch instructions.
+- **Avec RecompLauncher** (le plus simple) : installe la
+  [dernière release](https://github.com/Fahze/Mercenaries-Recompiled/releases/latest),
+  choisis ton ISO et clique sur Set Up. Le jeu est compilé sur ton PC à partir
+  de ton disque, puis se lance avec Play.
+- **À la main** : suis la section [Build from source](#build-from-source)
+  ci-dessous en indiquant ton ISO française.
 
-Windows x64 is the supported native build. Wine/Proton runs the Windows payload
-as a separate compatibility path. The reusable toolkit's POSIX/OpenGL code does
-not imply a supported native Linux or macOS Mercenaries build.
+Testé sur le disque FR : première mission terminée et sauvegarde fonctionnelle,
+y compris en passant par RecompLauncher. Pour signaler un problème, ouvre une
+[issue sur ce dépôt](https://github.com/Fahze/Mercenaries-Recompiled/issues).
+
+## What this fork adds
+
+| | Upstream | This fork |
+| --- | --- | --- |
+| USA retail disc | ✔ | ✔ |
+| EU-FR (France) retail disc | ✘ | ✔, in French |
+| RecompLauncher package | Prebuilt player package, USA only | Built from your own disc, USA or EU-FR |
+
+**Supported discs** (`default.xbe` SHA-256):
+
+```text
+AA08EA21D952AC35F49C02C7E2ED08AA25AD7535FBBBCCC95636775F37BE99D7  USA
+9DD26D6CE030F467462A4A8132AC82217ECEA69ECFEF5FAB9238392642FDC356  EU-FR (Redump "Mercenaries (France)")
+```
+
+How EU-FR support works:
+- **Same code.** The EU-FR executable has the same code, section layout and
+  entry point as the USA one; only its certificate differs. Every translated
+  function and every generated patch of the upstream port applies unchanged.
+- **Disc language.** The French disc ships only `DATAxbox/french.dsk` (405
+  files instead of 434). The virtual console reports the language of the
+  installed language pack, as a real PAL console would.
+- **What was changed.** The XBE gates in the scripts, the runtime and the
+  launcher accept both hashes, and the launcher validates each disc's own
+  inventory.
+
+Other PAL languages (German, Italian, Spanish) are not supported yet: each
+needs its own XBE hash and inventory profile.
+
+## Play with RecompLauncher
+
+The [releases](https://github.com/Fahze/Mercenaries-Recompiled/releases) are
+RecompLauncher packages. They contain a `recomplauncher.json` manifest and a
+setup step, and **no game code or game data**. Setup works like this:
+
+1. You pick your disc image (.iso or XISO). The launcher checks it is an Xbox
+   disc.
+2. Setup installs Python 3.12 and the Visual Studio 2022 Build Tools (MSVC
+   14.44, Windows SDK 10.0.26100) if they are missing and you ticked them.
+   That is several GB, and Windows asks for admin rights once.
+3. It downloads this repository at the release's tag and builds the game from
+   your disc. This takes about 5 minutes on a fast PC, up to 40 on a slow one.
+4. It installs the game in `Game`. Saves (`Game\saves`, `Game\mod-saves`) and
+   settings (`Game\*.ini`) are kept across updates, and `setup.log` records
+   every step.
+
+Resolution, display mode, screen shape, frame rate, V-Sync and texture filtering
+can be changed from the game's page in RecompLauncher. The package sources are
+in [`ports/mercenaries/recomplauncher`](ports/mercenaries/recomplauncher).
 
 ## Build from source
 
@@ -70,6 +95,7 @@ Install these prerequisites:
   **14.44.35207**, and Windows SDK **10.0.26100.0**.
 - PowerShell 7 or Windows PowerShell 5.1.
 - Your legally obtained **USA or EU-FR (France) retail Xbox Mercenaries ISO**.
+  A PS2 disc is not a substitute for the Xbox build input.
 
 From the repository root in PowerShell:
 
@@ -83,19 +109,11 @@ or an appropriate local cache. The extractor and required runtime libraries are
 bundled with their notices. Visual Studio and the Windows SDK must already be
 installed.
 
-The script extracts and verifies the retail input, generates and patches the
-translated C, builds the runtime and launcher, and writes build provenance.
-The supported `default.xbe` SHA-256 values are:
-
-```text
-AA08EA21D952AC35F49C02C7E2ED08AA25AD7535FBBBCCC95636775F37BE99D7  USA
-9DD26D6CE030F467462A4A8132AC82217ECEA69ECFEF5FAB9238392642FDC356  EU-FR (Redump "Mercenaries (France)")
-```
-
-The EU-FR executable has the same code, section layout and entry point as the
-USA one; only its certificate differs. The French disc ships only
-`DATAxbox/french.dsk` (405 files instead of 434), so the runtime reports the
-console language matching the installed language pack.
+The script does the following:
+1. extracts the retail input and verifies it;
+2. generates the translated C and applies the port's patches;
+3. builds the runtime and the launcher;
+4. writes build provenance.
 
 Default output:
 
@@ -106,39 +124,49 @@ build/mercenaries/bin/Release/
 ```
 
 Keep the DLLs and supporting directories beside those executables. Start
-`Mercenaries Recompiled.exe` and select the supported ISO when prompted.
-See the [port guide](ports/mercenaries/README.md) for the installation contract
-and [release maintenance](docs/release-maintenance.md) for player packaging.
-A root-only CMake build produces toolkit libraries, not the game executable.
+`Mercenaries Recompiled.exe` and select your ISO when prompted. See the
+[port guide](ports/mercenaries/README.md) for the installation contract. A
+root-only CMake build produces toolkit libraries, not the game executable.
 
 Do not edit `ports/mercenaries/src/recomp/gen` to make permanent fixes. Its
 contents are regenerated; durable patches belong in the maintained generator,
 patch script, or port integration code.
 
-## Playing a prebuilt release
-
-Extract the entire player package and run `Mercenaries Recompiled.exe`. The
-launcher extracts and verifies your ISO on first launch; it does **not** compile
-the game on your computer. Keep the package's DLLs, `tools`, and `compat`
-directories together. Follow its `README-FIRST-LAUNCH.txt` for the instructions
-appropriate to that build. This source package does not contain those playable
-executables.
-
 ## Reporting a problem
 
-Use the repository's Issues tab. Include the exact build/version or executable
-hash, Windows version, CPU/GPU/RAM, resolution, control device, reproduction
-steps, and expected versus observed behavior. Mention any mods or changed
-settings. A screenshot or a short recording can help with rendering issues.
+Use this repository's
+[Issues tab](https://github.com/Fahze/Mercenaries-Recompiled/issues) for
+anything about the EU-FR disc or the RecompLauncher package. A problem that
+also happens with the USA disc on an upstream build belongs
+[upstream](https://github.com/KraftMacAndChee/Mercenaries-Recompiled/issues).
 
-For a runtime log, set `logging=1` under `[Developer]` in the player package's
-`developer.ini`, restart, and reproduce the problem. Press **F8** while the game
-has focus to mark the event in `preview-logs`. Logging is off by default. The
-optional F9 developer menu separately requires `developer_menu=1` and a restart.
+Include the following:
+- your disc (USA or EU-FR) and the release or executable hash;
+- your Windows version, CPU, GPU and RAM, resolution and control device;
+- the steps to reproduce, and what you expected versus what happened;
+- any mods or changed settings.
+
+For an install problem, attach `setup.log` from the install folder. A
+screenshot or a short recording can help with rendering issues.
+
+For a runtime log, set `logging=1` under `[Developer]` in `developer.ini`,
+restart, and reproduce the problem. Press **F8** while the game has focus to
+mark the event in `preview-logs`. Logging is off by default. The optional F9
+developer menu separately requires `developer_menu=1` and a restart.
 
 Review logs before attaching them; they can contain local paths. Do not upload
-disc images, extracted game data, or memory dumps to a public issue. Arrange a
-private channel if a maintainer needs a save or dump.
+disc images, extracted game data, or memory dumps to a public issue.
+
+## Staying in sync with upstream
+
+This fork tracks
+[KraftMacAndChee/Mercenaries-Recompiled](https://github.com/KraftMacAndChee/Mercenaries-Recompiled):
+- **The branches.** The EU-FR changes are on the
+  [`eu-fr-support`](https://github.com/Fahze/Mercenaries-Recompiled/tree/eu-fr-support)
+  branch, which PR #22 proposes upstream. `master` adds this README and the
+  RecompLauncher package on top.
+- **If upstream merges the EU-FR support.** This fork then only needs to
+  carry the RecompLauncher package.
 
 ## Contributing and validation
 
@@ -147,28 +175,24 @@ generated-code interfaces, rendering, audio, threading, or timing. Compatibility
 code can have ordering and lifetime requirements that ordinary refactoring
 would accidentally change.
 
-Tests are under `tools/`. Some use only maintained source, others compile native
-fixtures, and others require a verified retail input, generated code, or a
-specific capture. The isolated runner lists and selects tests without importing
-unrelated modules:
+Tests are under `tools/`. The isolated runner lists and selects tests without
+importing unrelated modules:
 
 ```powershell
 & .\.venv\Scripts\python.exe -m pip install pytest
 & .\.venv\Scripts\python.exe -X utf8 -B tools/recomp/run_tests.py --list
-& .\.venv\Scripts\python.exe -X utf8 -B tools/recomp/run_tests.py --match source_package_policy --output artifacts/source-policy-check
+& .\.venv\Scripts\python.exe -X utf8 -B tools/recomp/run_tests.py --match eu_fr_revision --output artifacts/eu-fr-check
 ```
 
-Use a new output directory for each run. Follow the contributor guide for the
-compiler environment and full-suite prerequisites. See
-[validation status](docs/maintenance-validation.md) and
-[the latest comment-cleanup baseline](docs/stale-comment-cleanup.md) for known
-failures. The recorded baseline has **458 successful module exits out of 471**;
-it is not an all-green test suite or a gameplay guarantee.
+Use a new output directory for each run. See
+[validation status](docs/maintenance-validation.md) for the upstream baseline
+and known failures; it is not an all-green test suite or a gameplay guarantee.
 
 ## Finding your way around
 
 | Path | Responsibility |
 | --- | --- |
+| `ports/mercenaries/recomplauncher` | RecompLauncher manifest, setup step and release packaging (this fork) |
 | `ports/mercenaries/src` | Game integration, controls, options, launcher, manual overrides |
 | `ports/mercenaries/scripts` | Extraction, generation patches, builds, packaging |
 | `ports/mercenaries/resources` | Embedded launcher resources and optional upgrade assets |
@@ -181,16 +205,15 @@ it is not an all-green test suite or a gameplay guarantee.
 
 Start with [ARCHITECTURE.md](ARCHITECTURE.md) and [CODE_MAP.md](CODE_MAP.md).
 The [documentation index](docs/README.md) gives the full maintainer reading order.
-Historical records explain decisions and failed approaches; their conclusions
-may have been superseded. Local evidence archives referenced by those records
-are not shipped. See [source distribution](docs/source-distribution.md) for the
-export boundary, manifest, and instructions for importing this snapshot into Git.
 
 ## Credits and licensing
 
 Mercenaries Recompiled is by Trenton Turner (KraftMacAndChee), building on
 sp00nz's xboxrecomp toolkit and work from the Xbox emulation and modding
-communities. This is an unofficial fan project, not an official game release.
+communities. The upstream project was built with the assistance of Codex 5.6 Sol
+and Astra. EU-FR disc support and the RecompLauncher package in this fork are by
+Fahze, written with Claude Code. This is an unofficial fan project, not an
+official game release.
 
 The root [MIT license](LICENSE) retains the toolkit's copyright notice. It does
 not replace imported components' licenses. xemu-derived code carries per-file
@@ -202,4 +225,4 @@ notice files before redistributing a modified package.
 Maintainer-supplied artwork, controller prompts, and optional upgrade resources
 are retained. Their inclusion does not grant new rights to those assets under
 the root MIT license. Mercenaries and its game assets belong to their respective
-owners. This export preserves attribution and development records.
+owners.
