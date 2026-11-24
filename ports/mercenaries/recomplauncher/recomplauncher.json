@@ -9,17 +9,35 @@
       "role": "game",
       "label": "Your disc image (.iso or XISO) of the original Xbox Mercenaries: Playground of Destruction, USA or France (EU-FR) retail.",
       "formats": [
-        { "type": "file", "extensions": ["iso"] }
+        {
+          "type": "file",
+          "extensions": [
+            "iso"
+          ]
+        }
       ],
-      "check": { "xdvdfs": "default.xbe" },
+      "check": {
+        "xdvdfs": "default.xbe"
+      },
       "dumps": [
-        { "name": "Mercenaries (France)", "size": 7825162240, "crc32": "7c6a540d" }
+        {
+          "name": "Mercenaries (France)",
+          "size": 7825162240,
+          "crc32": "7c6a540d"
+        }
       ]
     }
   ],
   "prepare": {
-    "program": ["Prepare.cmd"],
-    "args": ["-IsoPath", "{input:game}", "-SourceRef", "v1.1.1-eu-fr.1"],
+    "program": [
+      "Prepare.cmd"
+    ],
+    "args": [
+      "-IsoPath",
+      "{input:game}",
+      "-SourceRef",
+      "v1.1.1-eu-fr.2"
+    ],
     "label": "Building the game from your disc (20-40 minutes)",
     "done": [
       "{install}/Game/mercenaries_recomp.exe",
@@ -31,9 +49,13 @@
         "id": "python",
         "label": "Python 3.12",
         "note": "Needed to build the game. Installed for your user if this PC doesn't have it.",
-        "os": ["windows"],
+        "os": [
+          "windows"
+        ],
         "required": true,
-        "args": ["-AcceptPythonLicense"],
+        "args": [
+          "-AcceptPythonLicense"
+        ],
         "license": {
           "name": "Python Software Foundation License",
           "url": "https://docs.python.org/3/license.html"
@@ -43,9 +65,13 @@
         "id": "vs_build_tools",
         "label": "Microsoft Visual Studio 2022 Build Tools",
         "note": "Needed to build the game (MSVC 14.44 and Windows SDK 10.0.26100). Installed if missing; Windows asks for admin rights once.",
-        "os": ["windows"],
+        "os": [
+          "windows"
+        ],
         "required": true,
-        "args": ["-AcceptVsLicense"],
+        "args": [
+          "-AcceptVsLicense"
+        ],
         "license": {
           "name": "Microsoft Visual Studio license terms",
           "url": "https://visualstudio.microsoft.com/license-terms/"
@@ -54,12 +80,26 @@
     ]
   },
   "start": {
-    "program": ["Game/Mercenaries Recompiled.exe"]
+    "program": [
+      "Game/Mercenaries Recompiled.exe"
+    ]
   },
   "folders": {
-    "game": [{ "path": "{install}/Game" }],
-    "saves": [{ "path": "{install}/Game/saves" }],
-    "logs": [{ "path": "{install}/Game/preview-logs" }]
+    "game": [
+      {
+        "path": "{install}/Game"
+      }
+    ],
+    "saves": [
+      {
+        "path": "{install}/Game/saves"
+      }
+    ],
+    "logs": [
+      {
+        "path": "{install}/Game/preview-logs"
+      }
+    ]
   },
   "saves": [
     "{install}/Game/saves",
@@ -72,7 +112,25 @@
     {
       "id": "main",
       "format": "ini",
-      "file": [{ "path": "{install}/Game/mercenaries_recomp.ini" }]
+      "file": [
+        {
+          "path": "{install}/Game/mercenaries_recomp.ini"
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "Display"
+    },
+    {
+      "id": "Graphics"
+    },
+    {
+      "id": "Controls"
+    },
+    {
+      "id": "Gameplay"
     }
   ],
   "settings": [
@@ -82,60 +140,175 @@
       "help": "What the game draws at.",
       "in": "main",
       "choices": [
-        { "label": "480p (original)", "set": { "RecompOptions/ResolutionScale": "0" } },
-        { "label": "720p", "set": { "RecompOptions/ResolutionScale": "1" } },
-        { "label": "900p", "set": { "RecompOptions/ResolutionScale": "2" } },
-        { "label": "1080p", "set": { "RecompOptions/ResolutionScale": "3" } },
-        { "label": "1440p", "set": { "RecompOptions/ResolutionScale": "4" } },
-        { "label": "4K", "set": { "RecompOptions/ResolutionScale": "5" } }
+        {
+          "label": "480p (original)",
+          "set": {
+            "RecompOptions/ResolutionScale": "0"
+          }
+        },
+        {
+          "label": "720p",
+          "set": {
+            "RecompOptions/ResolutionScale": "1"
+          }
+        },
+        {
+          "label": "900p",
+          "set": {
+            "RecompOptions/ResolutionScale": "2"
+          }
+        },
+        {
+          "label": "1080p",
+          "set": {
+            "RecompOptions/ResolutionScale": "3"
+          }
+        },
+        {
+          "label": "1440p",
+          "set": {
+            "RecompOptions/ResolutionScale": "4"
+          }
+        },
+        {
+          "label": "4K",
+          "set": {
+            "RecompOptions/ResolutionScale": "5"
+          }
+        }
       ],
-      "defaults": { "RecompOptions/ResolutionScale": "0" }
+      "defaults": {
+        "RecompOptions/ResolutionScale": "0"
+      },
+      "group": "Display"
     },
     {
       "id": "window",
       "label": "Display mode",
       "in": "main",
       "choices": [
-        { "label": "Windowed", "set": { "RecompOptions/DisplayMode": "0" } },
-        { "label": "Borderless", "set": { "RecompOptions/DisplayMode": "1" } },
-        { "label": "Full screen", "set": { "RecompOptions/DisplayMode": "2" } }
+        {
+          "label": "Windowed",
+          "set": {
+            "RecompOptions/DisplayMode": "0"
+          }
+        },
+        {
+          "label": "Borderless",
+          "set": {
+            "RecompOptions/DisplayMode": "1"
+          }
+        },
+        {
+          "label": "Full screen",
+          "set": {
+            "RecompOptions/DisplayMode": "2"
+          }
+        }
       ],
-      "defaults": { "RecompOptions/DisplayMode": "0" }
+      "defaults": {
+        "RecompOptions/DisplayMode": "0"
+      },
+      "group": "Display"
     },
     {
       "id": "aspect",
       "label": "Screen shape",
       "in": "main",
       "choices": [
-        { "label": "Original (4:3)", "set": { "RecompOptions/AspectRatio": "0" } },
-        { "label": "16:9", "set": { "RecompOptions/AspectRatio": "1" } },
-        { "label": "16:10", "set": { "RecompOptions/AspectRatio": "2" } },
-        { "label": "21:9", "set": { "RecompOptions/AspectRatio": "3" } }
+        {
+          "label": "Original (4:3)",
+          "set": {
+            "RecompOptions/AspectRatio": "0"
+          }
+        },
+        {
+          "label": "16:9",
+          "set": {
+            "RecompOptions/AspectRatio": "1"
+          }
+        },
+        {
+          "label": "16:10",
+          "set": {
+            "RecompOptions/AspectRatio": "2"
+          }
+        },
+        {
+          "label": "21:9",
+          "set": {
+            "RecompOptions/AspectRatio": "3"
+          }
+        }
       ],
-      "defaults": { "RecompOptions/AspectRatio": "0" }
+      "defaults": {
+        "RecompOptions/AspectRatio": "0"
+      },
+      "group": "Display"
     },
     {
       "id": "fps",
       "label": "Frame rate",
       "in": "main",
       "choices": [
-        { "label": "30 fps (original)", "set": { "RecompOptions/FPSCap": "30" } },
-        { "label": "60 fps", "set": { "RecompOptions/FPSCap": "60" } },
-        { "label": "90 fps", "set": { "RecompOptions/FPSCap": "90" } },
-        { "label": "120 fps", "set": { "RecompOptions/FPSCap": "120" } },
-        { "label": "Unlimited", "set": { "RecompOptions/FPSCap": "0" } }
+        {
+          "label": "30 fps (original)",
+          "set": {
+            "RecompOptions/FPSCap": "30"
+          }
+        },
+        {
+          "label": "60 fps",
+          "set": {
+            "RecompOptions/FPSCap": "60"
+          }
+        },
+        {
+          "label": "90 fps",
+          "set": {
+            "RecompOptions/FPSCap": "90"
+          }
+        },
+        {
+          "label": "120 fps",
+          "set": {
+            "RecompOptions/FPSCap": "120"
+          }
+        },
+        {
+          "label": "Unlimited",
+          "set": {
+            "RecompOptions/FPSCap": "0"
+          }
+        }
       ],
-      "defaults": { "RecompOptions/FPSCap": "30" }
+      "defaults": {
+        "RecompOptions/FPSCap": "30"
+      },
+      "group": "Display"
     },
     {
       "id": "vsync",
       "label": "V-Sync",
       "in": "main",
       "choices": [
-        { "label": "Off", "set": { "RecompOptions/VSync": "0" } },
-        { "label": "On", "set": { "RecompOptions/VSync": "1" } }
+        {
+          "label": "Off",
+          "set": {
+            "RecompOptions/VSync": "0"
+          }
+        },
+        {
+          "label": "On",
+          "set": {
+            "RecompOptions/VSync": "1"
+          }
+        }
       ],
-      "defaults": { "RecompOptions/VSync": "0" }
+      "defaults": {
+        "RecompOptions/VSync": "0"
+      },
+      "group": "Display"
     },
     {
       "id": "aniso",
@@ -143,13 +316,209 @@
       "help": "16x keeps textures sharp at an angle.",
       "in": "main",
       "choices": [
-        { "label": "Off", "set": { "RecompOptions/Anisotropic16x": "0" } },
-        { "label": "16x", "set": { "RecompOptions/Anisotropic16x": "1" } }
+        {
+          "label": "Off",
+          "set": {
+            "RecompOptions/Anisotropic16x": "0"
+          }
+        },
+        {
+          "label": "16x",
+          "set": {
+            "RecompOptions/Anisotropic16x": "1"
+          }
+        }
       ],
-      "defaults": { "RecompOptions/Anisotropic16x": "0" }
+      "defaults": {
+        "RecompOptions/Anisotropic16x": "0"
+      },
+      "group": "Graphics"
+    },
+    {
+      "id": "fov",
+      "label": "Field of view",
+      "help": "Camera field of view, in degrees at 4:3. The game's own value is 55.",
+      "in": "main",
+      "group": "Graphics",
+      "slider": {
+        "key": "RecompOptions/FOV",
+        "min": 40,
+        "max": 100,
+        "step": 1,
+        "format": "%d"
+      },
+      "defaults": {
+        "RecompOptions/FOV": "55"
+      }
+    },
+    {
+      "id": "haze",
+      "label": "Haze",
+      "help": "Distance haze. Authentic reproduces the original blur filter; Unfiltered keeps the haze without that blur.",
+      "in": "main",
+      "group": "Graphics",
+      "choices": [
+        {
+          "label": "Off",
+          "set": {
+            "RecompOptions/HazeMode": "0"
+          }
+        },
+        {
+          "label": "Authentic",
+          "set": {
+            "RecompOptions/HazeMode": "1"
+          }
+        },
+        {
+          "label": "Unfiltered",
+          "set": {
+            "RecompOptions/HazeMode": "2"
+          }
+        }
+      ],
+      "defaults": {
+        "RecompOptions/HazeMode": "1"
+      }
+    },
+    {
+      "id": "npc_lod",
+      "label": "Character detail",
+      "help": "Always High keeps people at full detail at any distance.",
+      "in": "main",
+      "group": "Graphics",
+      "choices": [
+        {
+          "label": "Original",
+          "set": {
+            "RecompOptions/NpcLOD": "0"
+          }
+        },
+        {
+          "label": "Always high",
+          "set": {
+            "RecompOptions/NpcLOD": "1"
+          }
+        }
+      ],
+      "defaults": {
+        "RecompOptions/NpcLOD": "0"
+      }
+    },
+    {
+      "id": "ps2_upgrades",
+      "label": "PS2 upgrades",
+      "help": "Uses a few textures and weapon sounds from the PlayStation 2 version.",
+      "in": "main",
+      "group": "Graphics",
+      "choices": [
+        {
+          "label": "Off",
+          "set": {
+            "RecompOptions/PS2Upgrades": "0"
+          }
+        },
+        {
+          "label": "On",
+          "set": {
+            "RecompOptions/PS2Upgrades": "1"
+          }
+        }
+      ],
+      "defaults": {
+        "RecompOptions/PS2Upgrades": "0"
+      }
+    },
+    {
+      "id": "xbox_prompts",
+      "label": "Button prompts",
+      "help": "Original Xbox keeps the game's Xbox button pictures instead of matching your controller or keyboard.",
+      "in": "main",
+      "group": "Controls",
+      "choices": [
+        {
+          "label": "Match my device",
+          "set": {
+            "RecompOptions/FixedXboxPrompts": "0"
+          }
+        },
+        {
+          "label": "Original Xbox",
+          "set": {
+            "RecompOptions/FixedXboxPrompts": "1"
+          }
+        }
+      ],
+      "defaults": {
+        "RecompOptions/FixedXboxPrompts": "0"
+      }
+    },
+    {
+      "id": "npc_wake",
+      "label": "NPC wake distance",
+      "help": "How far away people and vehicles start acting. Higher values cost more CPU.",
+      "in": "main",
+      "group": "Gameplay",
+      "advanced": true,
+      "choices": [
+        {
+          "label": "Original",
+          "set": {
+            "RecompOptions/NpcWakeDistance": "0"
+          }
+        },
+        {
+          "label": "150%",
+          "set": {
+            "RecompOptions/NpcWakeDistance": "1"
+          }
+        },
+        {
+          "label": "200%",
+          "set": {
+            "RecompOptions/NpcWakeDistance": "2"
+          }
+        },
+        {
+          "label": "300%",
+          "set": {
+            "RecompOptions/NpcWakeDistance": "3"
+          }
+        }
+      ],
+      "defaults": {
+        "RecompOptions/NpcWakeDistance": "0"
+      }
+    },
+    {
+      "id": "og_bugs",
+      "label": "Original bugs",
+      "help": "On keeps a few bugs of the original game. Off applies the port's optional corrections (see docs/original-game-bugs.md).",
+      "in": "main",
+      "group": "Gameplay",
+      "advanced": true,
+      "choices": [
+        {
+          "label": "On (original)",
+          "set": {
+            "RecompOptions/OGBugs": "1"
+          }
+        },
+        {
+          "label": "Off (fixed)",
+          "set": {
+            "RecompOptions/OGBugs": "0"
+          }
+        }
+      ],
+      "defaults": {
+        "RecompOptions/OGBugs": "1"
+      }
     }
   ],
   "system": {
-    "windows": { "version": "10" }
+    "windows": {
+      "version": "10"
+    }
   }
 }

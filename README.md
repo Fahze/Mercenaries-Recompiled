@@ -82,9 +82,18 @@ setup step, and **no game code or game data**. Setup works like this:
    settings (`Game\*.ini`) are kept across updates, and `setup.log` records
    every step.
 
-Resolution, display mode, screen shape, frame rate, V-Sync and texture filtering
-can be changed from the game's page in RecompLauncher. The package sources are
-in [`ports/mercenaries/recomplauncher`](ports/mercenaries/recomplauncher).
+The game's page in RecompLauncher shows the port's options. They are written to
+`Game\mercenaries_recomp.ini`, the same file as the in-game Recomp Options menu:
+
+- **Display**: resolution, display mode, screen shape, frame rate cap, V-Sync.
+- **Graphics**: texture filtering, field of view, haze, character detail, PS2
+  upgrades.
+- **Controls**: button prompts (match your device, or keep the original Xbox
+  ones).
+- **Gameplay** (advanced): NPC wake distance, original bugs.
+
+The package sources are in
+[`ports/mercenaries/recomplauncher`](ports/mercenaries/recomplauncher).
 
 ## Build from source
 
