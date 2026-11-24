@@ -7,13 +7,15 @@
 > release, so all generated patches apply unchanged; the runtime reports the
 > console language matching the disc's `DATAxbox/french.dsk`. The changes live
 > on the [`eu-fr-support`](https://github.com/Fahze/Mercenaries-Recompiled/tree/eu-fr-support)
-> branch, which is intended for upstream. Build exactly as described below, passing
-> the French ISO.
+> branch, proposed upstream in
+> [KraftMacAndChee/Mercenaries-Recompiled#22](https://github.com/KraftMacAndChee/Mercenaries-Recompiled/pull/22).
+> Build exactly as described below, passing the French ISO.
 >
 > **Fork : prise en charge du disque EU-FR.** Ce fork accepte aussi le disque
 > Xbox PAL français. Le jeu se compile avec la même commande que ci-dessous en
 > indiquant l'ISO française, et s'affiche en français. Testé : première mission
-> terminée et sauvegarde fonctionnelle.
+> terminée et sauvegarde fonctionnelle. Proposé au projet d'origine dans la
+> [pull request #22](https://github.com/KraftMacAndChee/Mercenaries-Recompiled/pull/22).
 
 DISCLAIMER: This project utilized a hybrid-workflow and iterative development.
 	    It was built with the assistance of Codex 5.6 Sol and Astra!
